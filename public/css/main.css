@@ -3,4 +3,28 @@ body {
   color: rgb(38, 62, 140);
   font-family: "Oswald", sans-serif;
   font-size: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: rgb(20, 37, 92);
+  font-size: 40px;
+  font-family: "Oswald", sans-serif;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  font-family: "Oswald", sans-serif;
+  text-align: center;
+  background: rgb(85, 115, 180);
+  padding: 20px;
+}
+
+ul li {
+  background: rgb(184, 204, 244);
+  color: rgb(20, 37, 92);
+  padding: 10px;
+  margin-left: 20px;
 }

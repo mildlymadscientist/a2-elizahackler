@@ -117,13 +117,10 @@ Include a very brief summary of your project here. Be sure to include the CSS po
 - **Design Achievement 1**: 
 
 
+4) display items in list
+7) make server work
 
-
-2) edit array to store todo items
-    label items
-
-3) make second page
-
-4) display items in page
-
-5) do functionality
+Sources:
+https://www.w3schools.com/CSS/css_list.asp
+https://codepen.io/GreenSock/pen/VwrBeVw
+https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Basic_native_form_controls
