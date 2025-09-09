@@ -33,6 +33,8 @@ const submit = async function (event) {
     body
   })
 
+  console.log("response:", response)
+
   // read the text in the response
   const text = await response.text()
 

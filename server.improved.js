@@ -17,6 +17,7 @@ const appdata = [
 
 //makes server
 const server = http.createServer(function (request, response) {
+  console.log("Request incoming.")
   if (request.method === "GET") {
     handleGet(request, response)
   } else if (request.method === "POST") {
