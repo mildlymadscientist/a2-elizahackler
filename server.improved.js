@@ -27,6 +27,7 @@ const server = http.createServer(function (request, response) {
 
 //handles get requests to get data
 const handleGet = function (request, response) {
+  console.log("Request GET.")
   //if requesting data, send it
   const filename = dir + request.url.slice(1)
 
@@ -40,6 +41,7 @@ const handleGet = function (request, response) {
 
 //handles post requests to add/edit data
 const handlePost = function (request, response) {
+  console.log("Request POST.")
   let dataString = ""
 
   // listen for data to come in
@@ -68,10 +70,11 @@ const handlePost = function (request, response) {
 
     // get due date from newdata
     const newdata = JSON.parse(dataString)
+    console.log("Data:", newdata)
 
     //add newdata to appdata and update overdue
     appdata.push(newdata)
-    checkOverdue()
+    //checkOverdue()
     console.log(appdata)
 
     // send a response
@@ -88,27 +91,30 @@ const checkOverdue = function () {
   const day = currentdate.getDate()
   const year = currentdate.getFullYear()
 
-  //check all tasks for overdue
-  for (let i = 0; i < appdata.length; i++) {
-    //get date of task
+  // //check all tasks for overdue
+  // for (let i = 0; i < appdata.length; i++) {
+  //   //get date of task
 
-    const duedate = appdata[i]["Duedate"]
-    const duedatestring = duedate.toString()
-    const duedateyear = duedatestring.slice(0, 4)
-    const duedatemonth = duedatestring.slice(4, 6)
-    const duedateday = duedatestring.slice(6, 8)
 
-    //compare to current date
-    if (duedateyear < year) {
-      appdata[i]["Overdue"] = true
-    } else if (duedateyear == year && duedatemonth < month) {
-      appdata[i]["Overdue"] = true
-    } else if (duedateyear == year && duedatemonth == month && duedateday < day) {
-      appdata[i]["Overdue"] = true
-    } else {
-      appdata[i]["Overdue"] = false
-    }
-  }
+  //   console.log("Checking task:", appdata[i]["Task"])
+
+  //   const duedate = appdata[i]["Duedate"]
+  //   const duedatestring = duedate.toString()
+  //   const duedateyear = duedatestring.slice(0, 4)
+  //   const duedatemonth = duedatestring.slice(4, 6)
+  //   const duedateday = duedatestring.slice(6, 8)
+
+  //   //compare to current date
+  //   if (duedateyear < year) {
+  //     appdata[i]["Overdue"] = true
+  //   } else if (duedateyear == year && duedatemonth < month) {
+  //     appdata[i]["Overdue"] = true
+  //   } else if (duedateyear == year && duedatemonth == month && duedateday < day) {
+  //     appdata[i]["Overdue"] = true
+  //   } else {
+  //     appdata[i]["Overdue"] = false
+  //   }
+  // }
 }
 
 // function for sending a file

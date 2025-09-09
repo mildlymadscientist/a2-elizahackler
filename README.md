@@ -118,7 +118,8 @@ Include a very brief summary of your project here. Be sure to include the CSS po
 
 
 4) display items in list
-7) make server work
+7) fix overdue
+8) get data on client side
 
 Sources:
 https://www.w3schools.com/CSS/css_list.asp
