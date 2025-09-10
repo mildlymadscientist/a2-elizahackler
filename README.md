@@ -108,7 +108,8 @@ Sample Readme (delete the above when you're ready to submit, and modify the belo
 ---
 
 ## Your Web Application Title
-Include a very brief summary of your project here. Be sure to include the CSS positioning technique you used, and any required instructions to use your application.
+Simple ToDo list website that stores, displays, and dynamically updates a list of tasks. It takes in a task name and a date. If the task name already exists, it will mark the task as complete, otherwise it will make a new one. Whenever a task is modified, the program will check all the tasks to see if they are overdue. 
+Uses FlexBox for positioning. 
 
 ## Technical Achievements
 - **Tech Achievement 1**: Using a combination of...
@@ -116,12 +117,11 @@ Include a very brief summary of your project here. Be sure to include the CSS po
 ### Design/Evaluation Achievements
 - **Design Achievement 1**: 
 
-
-9) FlexBox
-10) Simplify
-11) Better commenting
-
 Sources:
 https://www.w3schools.com/CSS/css_list.asp
+https://www.w3schools.com/csS/css3_flexbox.asp
 https://codepen.io/GreenSock/pen/VwrBeVw
 https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Basic_native_form_controls
+https://stackoverflow.com/questions/4622808/html-changing-colors-of-specific-words-in-a-string-of-text
+
+Used Copilot to debug date comparison in overdue. 

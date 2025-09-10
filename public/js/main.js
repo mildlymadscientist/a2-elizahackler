@@ -17,15 +17,7 @@ const submit = async function (event) {
     DBody = JSON.stringify(json2)
 
   //comebine into one object
-
-
-  console.log("Task Body:", TBody)
-  console.log("Duedate Body:", DBody)
-
   body = "{" + TBody.slice(1, -1) + "," + DBody.slice(1)
-
-  console.log("Combined body:", body)
-
 
   // send the data to the server using fetch()
   const response = await fetch("/submit", {
@@ -33,33 +25,31 @@ const submit = async function (event) {
     body
   })
 
-  console.log("response:", response)
-
-  // read the text in the response
+  // read response
   const text = await response.text()
 
-  // parse the text as JSON
   const data = JSON.parse(text)
   console.log("data:", data)
 
   //add each task to todolist
   const list = document.getElementById("todolist");
-  list.innerHTML = ""; // Clear existing list items
+  list.innerHTML = "";
   for (let i = 0; i < data.length; i++) {
     const item = document.createElement("li");
     item.textContent = data[i]["Task"];
     if (data[i]["Overdue"]) {
       item.style.color = "red";
     }
+    else {
+      item.style.color = "green";
+    }
     list.appendChild(item);
   }
-
 
   console.log("text:", text)
 
 }
 
-// when the page loads set up the button
 window.onload = function () {
   const button = document.querySelector("button");
   button.onclick = submit;

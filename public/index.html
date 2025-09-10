@@ -16,12 +16,11 @@
 </head>
 
 <body>
-  <p>
-    <text>Add name and date of task</text>
-  </p>
-  <p>
-    <text><strong>Add a new item, or enter a current task to mark it complete.</strong></text>
-  </p>
+
+  <div class="flex-container">
+    <div>Add name and date of task</div>
+    <div><strong>Add a new item, or enter a current task to mark it complete.</strong></div>
+  </div>
 
   <form>
     <p>
@@ -38,12 +37,17 @@
   </form>
 </body>
 
-<h1>ToDo List:</h1>
+
+<div class="flex-container">
+  <div>Tasks that are overdue are in <span style="color: red">red</span>.</div>
+  <div>Tasks that are upcoming are in <span style="color: green">green</span>.</div>
+  <div>
+    <h1>ToDo List:</h1>
+  </div>
+</div>
 
 <ul id="todolist">
-  <li>Sample Task 1</li>
-  <li>Sample Task 2</li>
-  <li>Sample Task 3</li>
+  <li>Add item to display list</li>
 </ul>
 
 </html>

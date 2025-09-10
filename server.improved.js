@@ -15,9 +15,8 @@ const appdata = [
   { "Task": "Fix car", "Duedate": 20250916, "Overdue": false }
 ]
 
-//makes server
+//make server
 const server = http.createServer(function (request, response) {
-  console.log("Request incoming.")
   if (request.method === "GET") {
     handleGet(request, response)
   } else if (request.method === "POST") {
@@ -25,13 +24,9 @@ const server = http.createServer(function (request, response) {
   }
 })
 
-//handles get requests to get data
 const handleGet = function (request, response) {
-  console.log("Request GET.")
-  //if requesting data, send it
   const filename = dir + request.url.slice(1)
 
-  //if no file is specified, send index.html
   if (request.url === "/") {
     sendFile(response, "public/index.html")
   } else {
@@ -39,27 +34,23 @@ const handleGet = function (request, response) {
   }
 }
 
-//handles post requests to add/edit data
 const handlePost = function (request, response) {
-  console.log("Request POST.")
   let dataString = ""
 
-  // listen for data to come in
   request.on("data", function (data) {
     dataString += data
   })
 
-  // listen for the end of the data
   request.on("end", function () {
-    console.log(JSON.parse(dataString))
 
     // ... do something with the data here!!!
+
     let check = false
-    //find if tasks has already been entered
+    //find if task has already been created
     for (let i = 0; i < appdata.length; i++) {
       if (appdata[i]["Task"] === JSON.parse(dataString)["Task"]) {
+        //delete task
         appdata.splice(i, 1)
-        console.log("Removed old task.")
         check = true
         break
       }
@@ -69,15 +60,13 @@ const handlePost = function (request, response) {
 
       // get due date from newdata
       const newdata = JSON.parse(dataString)
-      console.log("Data:", newdata)
 
-      //add newdata to appdata and update overdue
+      //add newdata to appdata
       appdata.push(newdata)
     }
 
-
+    // update overdue
     checkOverdue()
-    console.log(appdata)
 
     // send a response with appdata for client to use
     response.writeHead(200, "OK", { "Content-Type": "application/json" })
@@ -95,11 +84,10 @@ const checkOverdue = function () {
 
   //format date as yyyymmdd
   const formattedcurrentdate = year * 10000 + month * 100 + day
-  console.log("Current date:", formattedcurrentdate)
 
   //check if each task is overdue
   for (let i = 0; i < appdata.length; i++) {
-    console.log("Due date:", appdata[i]["Duedate"])
+
     if (appdata[i]["Duedate"] < formattedcurrentdate) {
       appdata[i]["Overdue"] = true
     } else {
