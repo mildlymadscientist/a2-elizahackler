@@ -12,15 +12,15 @@ const submit = async function (event) {
     json = { Task: input.value },
     TBody = JSON.stringify(json)
 
-  const dateInput = document.querySelector("#Date"),
-    json2 = { Date: dateInput.value },
+  const dateInput = document.querySelector("#Duedate"),
+    json2 = { Duedate: dateInput.value },
     DBody = JSON.stringify(json2)
 
   //comebine into one object
 
 
   console.log("Task Body:", TBody)
-  console.log("Date Body:", DBody)
+  console.log("Duedate Body:", DBody)
 
   body = "{" + TBody.slice(1, -1) + "," + DBody.slice(1)
 
@@ -38,24 +38,29 @@ const submit = async function (event) {
   // read the text in the response
   const text = await response.text()
 
+  // parse the text as JSON
+  const data = JSON.parse(text)
+  console.log("data:", data)
+
+  //add each task to todolist
+  const list = document.getElementById("todolist");
+  list.innerHTML = ""; // Clear existing list items
+  for (let i = 0; i < data.length; i++) {
+    const item = document.createElement("li");
+    item.textContent = data[i]["Task"];
+    if (data[i]["Overdue"]) {
+      item.style.color = "red";
+    }
+    list.appendChild(item);
+  }
+
+
   console.log("text:", text)
+
 }
 
 // when the page loads set up the button
 window.onload = function () {
   const button = document.querySelector("button");
   button.onclick = submit;
-}
-
-//turn all objects from appdata into list items
-const listItems = function () {
-  const list = document.getElementById("todolist")
-  appdata.forEach(item => {
-    let li = document.createElement("li")
-    li.innerText = item["Task"] + " " + item["Date"]
-    if (item["Overdue"]) {
-      li.style.color = "red"
-    }
-    list.appendChild(li)
-  })
 }

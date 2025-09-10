@@ -54,32 +54,34 @@ const handlePost = function (request, response) {
     console.log(JSON.parse(dataString))
 
     // ... do something with the data here!!!
-
+    let check = false
     //find if tasks has already been entered
     for (let i = 0; i < appdata.length; i++) {
       if (appdata[i]["Task"] === JSON.parse(dataString)["Task"]) {
         appdata.splice(i, 1)
         console.log("Removed old task.")
-
-        //done
+        check = true
         break
       }
     }
 
-    //add new task and check if overdue
+    if (!check) {
 
-    // get due date from newdata
-    const newdata = JSON.parse(dataString)
-    console.log("Data:", newdata)
+      // get due date from newdata
+      const newdata = JSON.parse(dataString)
+      console.log("Data:", newdata)
 
-    //add newdata to appdata and update overdue
-    appdata.push(newdata)
-    //checkOverdue()
+      //add newdata to appdata and update overdue
+      appdata.push(newdata)
+    }
+
+
+    checkOverdue()
     console.log(appdata)
 
-    // send a response
-    response.writeHead(200, "OK", { "Content-Type": "text/plain" })
-    response.end("test")
+    // send a response with appdata for client to use
+    response.writeHead(200, "OK", { "Content-Type": "application/json" })
+    response.end(JSON.stringify(appdata))
   })
 }
 
@@ -87,34 +89,23 @@ const handlePost = function (request, response) {
 const checkOverdue = function () {
   // get current day
   const currentdate = new Date()
-  const month = currentdate.getMonth() + 1 //months from 1-12
+  const month = currentdate.getMonth() + 1
   const day = currentdate.getDate()
   const year = currentdate.getFullYear()
 
-  // //check all tasks for overdue
-  // for (let i = 0; i < appdata.length; i++) {
-  //   //get date of task
+  //format date as yyyymmdd
+  const formattedcurrentdate = year * 10000 + month * 100 + day
+  console.log("Current date:", formattedcurrentdate)
 
-
-  //   console.log("Checking task:", appdata[i]["Task"])
-
-  //   const duedate = appdata[i]["Duedate"]
-  //   const duedatestring = duedate.toString()
-  //   const duedateyear = duedatestring.slice(0, 4)
-  //   const duedatemonth = duedatestring.slice(4, 6)
-  //   const duedateday = duedatestring.slice(6, 8)
-
-  //   //compare to current date
-  //   if (duedateyear < year) {
-  //     appdata[i]["Overdue"] = true
-  //   } else if (duedateyear == year && duedatemonth < month) {
-  //     appdata[i]["Overdue"] = true
-  //   } else if (duedateyear == year && duedatemonth == month && duedateday < day) {
-  //     appdata[i]["Overdue"] = true
-  //   } else {
-  //     appdata[i]["Overdue"] = false
-  //   }
-  // }
+  //check if each task is overdue
+  for (let i = 0; i < appdata.length; i++) {
+    console.log("Due date:", appdata[i]["Duedate"])
+    if (appdata[i]["Duedate"] < formattedcurrentdate) {
+      appdata[i]["Overdue"] = true
+    } else {
+      appdata[i]["Overdue"] = false
+    }
+  }
 }
 
 // function for sending a file

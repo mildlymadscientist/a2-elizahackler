@@ -117,9 +117,9 @@ Include a very brief summary of your project here. Be sure to include the CSS po
 - **Design Achievement 1**: 
 
 
-4) display items in list
-7) fix overdue
-8) get data on client side
+9) FlexBox
+10) Simplify
+11) Better commenting
 
 Sources:
 https://www.w3schools.com/CSS/css_list.asp
